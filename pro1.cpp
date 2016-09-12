@@ -16,43 +16,44 @@
 double sinTaylor(int N, double x);
 double cosTaylor(int N, double x);
 long long int fac(int K);
-
+void errorBound(int N,double x,double sx,double sTx,double cx,double cTx);
 
 // function definitions	::	::	::	::
 
 using namespace std;
 
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[]) 
+{
   // main function, i.e. the program..
 
   double sx, sTx, cx, cTx;	// sinx/cosx from cmath & Taylor polyn.
-  double x = 0.3;
+  double x; int N;
 
-  /* to check the factorial function:
-  int K;
-  long long int fac;
-  cout << "K = ";
-  cin >> K;
-  fac = fac(K);
-  cout << "K! = " << fac << endl;
-  */
+  cout << "x = ";
+  cin >> x;
+  cout << "N = ";
+  cin >> N;
 
   sx = sin(x);
+  cout << fixed << setprecision(15);
   cout << "cmath gives sin(x) = " << sx << endl;
-  sTx = sinTaylor(7,x);
+  sTx = sinTaylor(N,x);
   cout << "Taylor gives sin(x) = " << sTx << endl;
   
   cx = cos(x);
   cout << "cmath gives cos(x) = " << cx << endl;
-  cTx = cosTaylor(7,x);
+  cTx = cosTaylor(N,x);
   cout << "Taylor gives cos(x) = " << cTx << endl;
+
+  errorBound(N,x,sx,sTx,cx,cTx);
 
   return 0;
 }
 
 
 
-double sinTaylor(int N, double x) {
+double sinTaylor(int N, double x) 
+{
   // returns value of N:th degree taylor polynomial for
   // sin function evaluated at x.
   // Horners algorithm is used to compute the series:
@@ -65,13 +66,14 @@ double sinTaylor(int N, double x) {
  
   double sinT;
 
+  // TODO finns det ett sätt utan att använda division med factorial-funktionen?
   sinT = ((double)(N % 2)/(double)fac(N));	// The aN term in the series
 
   for (int i = N-1; i >= 0; i--)
   {
     sinT = (double)(i % 2)*		// 1 for odd i, 0 for even i
       (double)(1 - 2*((i-1)/2 % 2))/	// 1 for i=1,5,9,.. and -1 when i=3,7,11,...
-      (double)fac(i)			// TODO finns det bättre sätt an att casta?
+      (double)fac(i)			// TODO finns det bättre sätt än att casta?
       + sinT*x;
   }
 
@@ -79,7 +81,8 @@ double sinTaylor(int N, double x) {
 }
 
 
-double cosTaylor(int N, double x) {
+double cosTaylor(int N, double x) 
+{
   // returns value of N:th degree taylor polynomial for
   // cos function evaluated at x.
   // Horners algorithm is used.
@@ -100,9 +103,10 @@ double cosTaylor(int N, double x) {
 }
 
 
-long long int fac(int K) {
+long long int fac(int K) 
+{
   // returns factorial(K), e.g. factorial(3) = 1*2*3 = 6
-  // seems to work only up to 20!
+  // seems to work only up to 20! ~ 2.4e18
 
   long long int ans = 1;
 
@@ -111,4 +115,34 @@ long long int fac(int K) {
 
   return ans;
 }
+
+void errorBound(int N,double x,double sx,double sTx,double cx,double cTx)
+{
+  // TODO, har jag gjort rätt här?...
+
+  double  sinTermN, cosTermN;
+
+  sinTermN = sinTaylor(N+1,x) - sinTaylor(N,x);
+  cosTermN = cosTaylor(N+1,x) - cosTaylor(N,x);
+  // fel??
+
+  //sinTermN = pow(x,N+1)/(double)fac(N+1);
+
+  cout << "sin N+1-term = " << sinTermN << endl;
+  cout << "cos N+1-term = " << cosTermN << endl;
+  
+  cout << "sin err/N+1-term = " << abs((sx-sTx)/sinTermN) << endl;
+  cout << "cos err/N+1-term = " << abs((cx-cTx)/cosTermN) << endl;
+
+
+  // no return statement fctn type void
+ 
+}
+
+
+
+
+
+
+
 
