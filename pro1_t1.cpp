@@ -18,6 +18,7 @@ double cosTaylor(int N, double x);
 long long int fac(int K);
 void errorBound(int N,double x,double sx,double sTx,double cx,double cTx);
 
+
 // function definitions	::	::	::	::
 
 using namespace std;
@@ -29,13 +30,11 @@ int main(int argc, char *argv[])
   double sx, sTx, cx, cTx;	// sinx/cosx from cmath & Taylor polyn.
   double x; int N;
 
-  cout << "x = ";
-  cin >> x;
-  cout << "N = ";
-  cin >> N;
+  cout << "x = "; cin >> x;	// Promt user for x and N
+  cout << "N = "; cin >> N;
 
   sx = sin(x);
-  cout << fixed << setprecision(15);
+  cout << fixed << setprecision(15);	// Print more decimals
   cout << "cmath gives sin(x) = " << sx << endl;
   sTx = sinTaylor(N,x);
   cout << "Taylor gives sin(x) = " << sTx << endl;
@@ -45,7 +44,7 @@ int main(int argc, char *argv[])
   cTx = cosTaylor(N,x);
   cout << "Taylor gives cos(x) = " << cTx << endl;
 
-  errorBound(N,x,sx,sTx,cx,cTx);
+  errorBound(N,x,sx,sTx,cx,cTx);	// Compute and display errors etc
 
   return 0;
 }
@@ -69,7 +68,7 @@ double sinTaylor(int N, double x)
   // TODO finns det ett sätt utan att använda division med factorial-funktionen?
   sinT = ((double)(N % 2)/(double)fac(N));	// The aN term in the series
 
-  for (int i = N-1; i >= 0; i--)
+  for (int i = N-1; i >= 0; i--)	// loops backward acc. Horners alg.
   {
     sinT = (double)(i % 2)*		// 1 for odd i, 0 for even i
       (double)(1 - 2*((i-1)/2 % 2))/	// 1 for i=1,5,9,.. and -1 when i=3,7,11,...
@@ -124,7 +123,7 @@ void errorBound(int N,double x,double sx,double sTx,double cx,double cTx)
 
   sinTermN = sinTaylor(N+1,x) - sinTaylor(N,x);
   cosTermN = cosTaylor(N+1,x) - cosTaylor(N,x);
-  // fel??
+  // fel?? tycker att man borde kanske ta sinTaylor(N+2,x)-sinT(N,x)...
 
   //sinTermN = pow(x,N+1)/(double)fac(N+1);
 
