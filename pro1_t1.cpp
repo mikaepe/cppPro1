@@ -1,6 +1,7 @@
-/* Project 1, SF2565, KTH
+/* Project 1 - Task 1, SF2565, KTH, 2016
  * comparison of taylor series for sin(x) and cos(x)
  * by cmath functions sin(x) and cos(x)
+ * Hanna Hultin & Mikael Persson
  */
 
 
@@ -94,18 +95,13 @@ void errorBound(int N,double x,double sx,double sTx,double cx,double cTx)
   // TODO, har jag gjort rätt här?...
 
   double  sinTermN, cosTermN;
-
   sinTermN = sinTaylor(N+1,x) - sinTaylor(N,x);
   cosTermN = cosTaylor(N+1,x) - cosTaylor(N,x);
 
   cout << "   sin N+1-term = " << sinTermN << endl;
   cout << "   cos N+1-term = " << cosTermN << endl;
-  
   cout << "sin err/N+1term = " << abs((sx-sTx)/sinTermN) << endl;
   cout << "cos err/N+1term = " << abs((cx-cTx)/cosTermN) << endl;
 
-  // no return statement fctn type void
+  // no return, fctn type void
 }
-
-
-// END....
