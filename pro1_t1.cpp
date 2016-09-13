@@ -15,7 +15,6 @@
 
 double sinTaylor(int N, double x);
 double cosTaylor(int N, double x);
-long long int fac(int K);
 void errorBound(int N,double x,double sx,double sTx,double cx,double cTx);
 
 
@@ -35,16 +34,16 @@ int main(int argc, char *argv[])
 
   sx = sin(x);
   cout << fixed << setprecision(15);	// Print more decimals
-  cout << "cmath gives sin(x) = " << sx << endl;
+  cout << "cmath:  sin(x) = " << sx << endl;
   sTx = sinTaylor(N,x);
-  cout << "Taylor gives sin(x) = " << sTx << endl;
+  cout << "Taylor: sin(x) = " << sTx << endl;
   
   cx = cos(x);
-  cout << "cmath gives cos(x) = " << cx << endl;
+  cout << "cmath:  cos(x) = " << cx << endl;
   cTx = cosTaylor(N,x);
-  cout << "Taylor gives cos(x) = " << cTx << endl;
+  cout << "Taylor: cos(x) = " << cTx << endl;
 
-  //errorBound(N,x,sx,sTx,cx,cTx);	// Compute and display errors etc
+  errorBound(N,x,sx,sTx,cx,cTx);	// Compute and display errors etc
 
   return 0;
 }
@@ -85,7 +84,6 @@ double cosTaylor(int N, double x)
   return cosT;
 }
 
-/*
 void errorBound(int N,double x,double sx,double sTx,double cx,double cTx)
 {
   // TODO, har jag gjort rätt här?...
@@ -95,7 +93,6 @@ void errorBound(int N,double x,double sx,double sTx,double cx,double cTx)
   sinTermN = sinTaylor(N+1,x) - sinTaylor(N,x);
   cosTermN = cosTaylor(N+1,x) - cosTaylor(N,x);
   // fel?? tycker att man borde kanske ta sinTaylor(N+2,x)-sinT(N,x)...
-
   //sinTermN = pow(x,N+1)/(double)fac(N+1);
 
   cout << "sin N+1-term = " << sinTermN << endl;
@@ -104,15 +101,8 @@ void errorBound(int N,double x,double sx,double sTx,double cx,double cTx)
   cout << "sin err/N+1-term = " << abs((sx-sTx)/sinTermN) << endl;
   cout << "cos err/N+1-term = " << abs((cx-cTx)/cosTermN) << endl;
 
-
   // no return statement fctn type void
- 
 }
-*/
 
 
-
-
-
-
-
+// END....
