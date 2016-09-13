@@ -1,0 +1,73 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage{amsmath,framed}
+\usepackage[latin1]{inputenc} 	
+\usepackage{arydshln} %matrix w/ dashes
+
+\renewcommand{\d}{\text{d}}
+\newcommand{\e}{\text{e}}
+\newcommand{\ve}{\mathbf}
+\newcommand\numb{\addtocounter{equation}{1}\tag{\theequation}}
+\newcommand\Chi{\raisebox{1pt}{$\chi$}}
+
+
+
+\setlength\fboxsep{1.2mm}
+\setlength\fboxrule{0.5mm}
+
+
+ %%Margins
+\usepackage{geometry}
+\geometry{
+  a4paper,
+  left=40mm,
+  right=40mm,
+  top=40mm,
+  bottom=40mm,
+}
+
+
+
+%Header & Footer
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{1pt}
+\rhead{Hanna Hultin, Mikael Perssson}
+\lhead{P1 SF565}
+
+\title{Project 1, SF2565}
+\author{Hanna Hultin, TTMAM2 \\ Mikael Persson, TTMAM2}
+
+
+\begin{document}
+\maketitle
+
+\subsubsection*{Task 1}
+Consider the $2N$ degree Taylor polynomial for  $\cos x$
+\begin{align*}
+  \cos x &\approx p(x) = \sum_{n=0}^{N} (-1)^n \frac{x^{2n}}{(2n)!} \\ 
+  \quad &= 1 + (-1) \frac{x^2}{2!} + (-1)^2 \frac{x^4}{4!} + \dots + (-1)^N \frac{x^{2N}}{(2N)!}
+  \\
+  &= 1 - \frac{x\cdot x}{2\cdot 1} \Big(1 - \frac{x \cdot x}{ 4 \cdot 3} \Big( 
+  1 - \dots \Big(1- \frac{x \cdot x}{(2N)(2N-1)}\Big)\dots \Big).
+\end{align*}
+Hence, the polynomial may be evaluated backwords using the following scheme
+\begin{align*}
+  b_N &= 1-\frac{x \cdot x}{2N(2N-1)} \\
+  b_n &= 1-\frac{x\cdot x}{2n(2n-1)}b_{n+1},\quad n = N-1,N-2,\dots,2,1 \\
+  b_1 &= p(x).
+\end{align*}
+This is Horners' algorithm adjusted for the fact that each second term in the polynomial vanishes.
+Similarly for $\sin x$ the polynomial may be computed up to degree $2N+1$ by
+\begin{align*}
+  b_N &= 1-\frac{x \cdot x}{2N(2N+1)} \\
+  b_n &= 1-\frac{x\cdot x}{2n(2n+1)}b_{n+1},\quad n = N-1,N-2,\dots,2,1 \\
+  b_1 &= x \cdot p(x).
+\end{align*}
+
+\end{document}
+
+
+
+
+
