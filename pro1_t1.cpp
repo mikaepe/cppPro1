@@ -24,25 +24,26 @@ using namespace std;
 
 int main(int argc, char *argv[]) 
 {
-  // main function, i.e. the program..
+  // main function. Prompts user for x and N. Calls sinTaylor and cosTaylor
+  // functions and displays results of these compared to cmath functions.
+  // The calls errorBound function to find if the error is bounded
+  // by the N+1-term in the series.
 
   double sx, sTx, cx, cTx;	// sinx/cosx from cmath & Taylor polyn.
-  double x = 4; int N = 5;
-  /*
+  double x; int N;
   cout << "x = "; cin >> x;	// Promt user for x and N
   cout << "N = "; cin >> N;
-*/
 
   sx = sin(x);
   cout << fixed << setprecision(15);	// Print more decimals
-  cout << "cmath:  sin(x) = " << sx << endl;
+  cout << "cmath:   sin(x) = " << sx << endl;
   sTx = sinTaylor(N,x);
-  cout << "Taylor: sin(x) = " << sTx << endl;
+  cout << "Taylor:  sin(x) = " << sTx << endl;
   
   cx = cos(x);
-  cout << "cmath:  cos(x) = " << cx << endl;
+  cout << "cmath:   cos(x) = " << cx << endl;
   cTx = cosTaylor(N,x);
-  cout << "Taylor: cos(x) = " << cTx << endl;
+  cout << "Taylor:  cos(x) = " << cTx << endl;
 
   errorBound(N,x,sx,sTx,cx,cTx);	// Compute and display errors etc
 
@@ -59,6 +60,9 @@ double sinTaylor(int N, double x)
   // p(x) = a0 + x*(a1 + x*(a2 + ... + x*(aN-1 + x*aN)))...)
   // so we define a sequence:
   // bN = aN; bN-1 = aN-1 + bN*x; ... ; b0 = a0 + b1*x = p(x)
+  //
+  // Note, some adjustments are made to cope with the fact that each
+  // second term vanishes in the sin series.
   
   double sinT;
   sinT = 1;
@@ -78,7 +82,7 @@ double cosTaylor(int N, double x)
   
   double cosT;
   cosT = 1;
-  for (int i = N; i > 0; i--)
+  for (int i = N; i > 0; i--) // Analogous to sin
   {
     cosT = 1-x*x*cosT/(double)(2*i*(2*i-1));
   }
@@ -93,14 +97,12 @@ void errorBound(int N,double x,double sx,double sTx,double cx,double cTx)
 
   sinTermN = sinTaylor(N+1,x) - sinTaylor(N,x);
   cosTermN = cosTaylor(N+1,x) - cosTaylor(N,x);
-  // fel?? tycker att man borde kanske ta sinTaylor(N+2,x)-sinT(N,x)...
-  //sinTermN = pow(x,N+1)/(double)fac(N+1);
 
-  cout << "sin N+1-term = " << sinTermN << endl;
-  cout << "cos N+1-term = " << cosTermN << endl;
+  cout << "   sin N+1-term = " << sinTermN << endl;
+  cout << "   cos N+1-term = " << cosTermN << endl;
   
-  cout << "sin err/N+1-term = " << abs((sx-sTx)/sinTermN) << endl;
-  cout << "cos err/N+1-term = " << abs((cx-cTx)/cosTermN) << endl;
+  cout << "sin err/N+1term = " << abs((sx-sTx)/sinTermN) << endl;
+  cout << "cos err/N+1term = " << abs((cx-cTx)/cosTermN) << endl;
 
   // no return statement fctn type void
 }
