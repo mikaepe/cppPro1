@@ -1,7 +1,7 @@
 CPPFLAGS=-Wall -g
 
-all: pro1 hello
+all: pro1_t1 hello
 
 clean:
-	rm -f pro1
+	rm -f pro1_t1
 	rm -f hello
