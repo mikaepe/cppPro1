@@ -27,10 +27,11 @@ int main(int argc, char *argv[])
   // main function, i.e. the program..
 
   double sx, sTx, cx, cTx;	// sinx/cosx from cmath & Taylor polyn.
-  double x = 0.3; int N = 5;
-
-  //cout << "x = "; cin >> x;	// Promt user for x and N
-  //cout << "N = "; cin >> N;
+  double x = 4; int N = 5;
+  /*
+  cout << "x = "; cin >> x;	// Promt user for x and N
+  cout << "N = "; cin >> N;
+*/
 
   sx = sin(x);
   cout << fixed << setprecision(15);	// Print more decimals
@@ -61,7 +62,7 @@ double sinTaylor(int N, double x)
   
   double sinT;
   sinT = 1;
-  for (int i = N+1; i > 1; i--)
+  for (int i = N; i > 0; i--)
   {
     sinT = 1-x*x*sinT/(double)(2*i*(2*i+1));
   }
