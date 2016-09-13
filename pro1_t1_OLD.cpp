@@ -28,10 +28,10 @@ int main(int argc, char *argv[])
   // main function, i.e. the program..
 
   double sx, sTx, cx, cTx;	// sinx/cosx from cmath & Taylor polyn.
-  double x = 0.3; int N = 5;
+  double x; int N;
 
-  //cout << "x = "; cin >> x;	// Promt user for x and N
-  //cout << "N = "; cin >> N;
+  cout << "x = "; cin >> x;	// Promt user for x and N
+  cout << "N = "; cin >> N;
 
   sx = sin(x);
   cout << fixed << setprecision(15);	// Print more decimals
@@ -44,10 +44,12 @@ int main(int argc, char *argv[])
   cTx = cosTaylor(N,x);
   cout << "Taylor gives cos(x) = " << cTx << endl;
 
-  //errorBound(N,x,sx,sTx,cx,cTx);	// Compute and display errors etc
+  errorBound(N,x,sx,sTx,cx,cTx);	// Compute and display errors etc
 
   return 0;
 }
+
+
 
 double sinTaylor(int N, double x) 
 {
@@ -59,16 +61,24 @@ double sinTaylor(int N, double x)
   // p(x) = a0 + x*(a1 + x*(a2 + ... + x*(aN-1 + x*aN)))...)
   // so we define a sequence:
   // bN = aN; bN-1 = aN-1 + bN*x; ... ; b0 = a0 + b1*x = p(x)
-  
+
+ 
   double sinT;
-  sinT = 1;
-  for (int i = N+1; i > 1; i--)
+
+  // TODO finns det ett sätt utan att använda division med factorial-funktionen?
+  sinT = ((double)(N % 2)/(double)fac(N));	// The aN term in the series
+
+  for (int i = N-1; i >= 0; i--)	// loops backward acc. Horners alg.
   {
-    sinT = 1-x*x*sinT/(double)(2*i*(2*i+1));
+    sinT = (double)(i % 2)*		// 1 for odd i, 0 for even i
+      (double)(1 - 2*((i-1)/2 % 2))/	// 1 for i=1,5,9,.. and -1 when i=3,7,11,...
+      (double)fac(i)			// TODO finns det bättre sätt än att casta?
+      + sinT*x;
   }
-  sinT = x*sinT;
+
   return sinT;
 }
+
 
 double cosTaylor(int N, double x) 
 {
@@ -77,15 +87,34 @@ double cosTaylor(int N, double x)
   // Horners algorithm is used.
   
   double cosT;
-  cosT = 1;
-  for (int i = N; i > 0; i--)
+
+  cosT= ((double)((N+1) % 2)/(double)fac(N));
+
+  for (int i = N-1; i >= 0; i--)
   {
-    cosT = 1-x*x*cosT/(double)(2*i*(2*i-1));
+    cosT = (double)((i+1) % 2)*		// analogous to sinx 
+      (double)(1 - 2*((i/2) % 2))/
+      (double)fac(i)
+      + cosT*x;
   }
+
   return cosT;
 }
 
-/*
+
+long long int fac(int K) 
+{
+  // returns factorial(K), e.g. factorial(3) = 1*2*3 = 6
+  // seems to work only up to 20! ~ 2.4e18
+
+  long long int ans = 1;
+
+  for (int k = 1; k <= K; k++)
+    ans *= k;
+
+  return ans;
+}
+
 void errorBound(int N,double x,double sx,double sTx,double cx,double cTx)
 {
   // TODO, har jag gjort rätt här?...
@@ -108,7 +137,7 @@ void errorBound(int N,double x,double sx,double sTx,double cx,double cTx)
   // no return statement fctn type void
  
 }
-*/
+
 
 
 
