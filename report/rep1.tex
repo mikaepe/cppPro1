@@ -1,8 +1,14 @@
+% REPORT FOR PROJECT1 SF2565
+
 \documentclass[a4paper,10pt]{article}
 
+%%Packages	%%%	%%%	%%%	%%%	%%%	%%%	%%%
 \usepackage{amsmath,framed}
 \usepackage[latin1]{inputenc} 	
+\usepackage{listings}
+\usepackage{xcolor}
 
+%%Settings	%%%	%%%	%%%	%%%	%%%	%%%	%%%
 \renewcommand{\d}{\text{d}}
 \newcommand{\e}{\text{e}}
 \newcommand{\ve}{\mathbf}
@@ -11,7 +17,13 @@
 \setlength\fboxsep{1.2mm}
 \setlength\fboxrule{0.5mm}
 
- %%Margins	%%%	%%%	%%%	%%%	%%%	%%%	%%%
+\lstset { %
+  language=C++,
+  backgroundcolor=\color{black!3},	% set backgroundcolor
+  basicstyle=\footnotesize,		% basic font setting
+}
+
+%%Margins	%%%	%%%	%%%	%%%	%%%	%%%	%%%
 \usepackage{geometry}
 \geometry{
   a4paper,
@@ -30,7 +42,6 @@
 
 \title{Project 1, SF2565}
 \author{Hanna Hultin, TTMAM2 \\ Mikael Persson, TTMAM2}
-
 \begin{document}
 \maketitle
 
@@ -56,6 +67,22 @@ Similarly for $\sin x$ the polynomial may be computed up to degree $2N+1$ by
   b_n &= 1-\frac{x\cdot x}{2n(2n+1)}b_{n+1},\quad n = N-1,N-2,\dots,2,1 \\
   b_1 &= x \cdot p(x).
 \end{align*}
+
+\newpage
+%test some code snippets
+\begin{center}
+\begin{minipage}[t]{85mm}
+\begin{lstlisting}
+for (int i=0; i<iterations;i++)
+{
+  do something
+}
+\end{lstlisting}
+\end{minipage}
+\end{center}
+
+%\newpage
+%\lstinputlisting[language=C++]{../pro1_t1.cpp}
 
 \end{document}
 
