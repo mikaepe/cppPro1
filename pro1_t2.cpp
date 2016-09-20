@@ -15,6 +15,7 @@ double iSimpson(double a, double b);
 double mid(double x, double y);
 double i2Simpson(double a, double b);
 double iRecursive(double a, double b, double tol);
+double iASI(double a, double b, double tol);
 
 // function definitions	::	::	::	::
 
@@ -30,10 +31,41 @@ int main(int argc, char *argv[])
   I = iRecursive(a,b,tol);
 
   cout << I << endl;
-  cout << "Matlab: I = 2.500809110336167" << endl;
+  cout << "Matlab: I = 2.500809110336167" << endl << flush;
 
   cout << tol << endl;
   return 0;
+}
+
+double iASI(double a, double b, double tol)
+{
+    double I = 0,I1,I2;
+    double errest;
+    int node = 1;
+    // ser det som ett träd istället för rekursivt
+    while(true){
+        I1 = iSimpson(a,b);
+        I2 = i2Simpson(a,b);
+        errest = abs(I1-I2);
+        if (errest < 15*tol){
+            I += I2;
+            // om ojämn node: 
+            // fortsätt upp till  1a jämna
+            // för varje hopp upp från ojämn node: node = floor(node,2, byt tillbaks a
+            // en upp från 1a jämna: node = node/22, byt tillbaks b 
+            // gå till höger: node = node*2 +1
+            // om ingen jämn innan node=1: break
+            
+            // om jämn node:
+            // en upp: node = node/22, byt tillbaks b 
+            // gå till höger: node = node*2 +1, ändra a
+        }
+        else{
+        // gå till vänster: node*=2, ändra b
+        }
+    }
+    
+    return I;
 }
 
 double iRecursive(double a, double b, double tol)
