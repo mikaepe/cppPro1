@@ -15,7 +15,7 @@ double iSimpson(double a, double b);
 double mid(double x, double y);
 double i2Simpson(double a, double b);
 double iRecursive(double a, double b, double tol);
-double iASI(double a, double b, double tol);
+double asi(double a, double b, double tol);
 
 // function definitions	::	::	::	::
 
@@ -26,45 +26,63 @@ int main(int argc, char *argv[])
   // main function.
 
   double a = -1.0,b = 1.0,tol = 1e-2;
-  double I;
+  double I, I_wr;
 
   I = iRecursive(a,b,tol);
+  I_wr = asi(a,b,tol);
 
-  cout << I << endl;
+  cout << "With recursion: "<< I << endl;
+  cout << "Without recursion: " << I_wr << endl;
   cout << "Matlab: I = 2.500809110336167" << endl << flush;
 
-  cout << tol << endl;
+  cout << "Tol: " << tol << endl;
   return 0;
 }
 
-double iASI(double a, double b, double tol)
-{
-    double I = 0,I1,I2;
+/* Ser rekursionen som ett träd istället för rekursivt
+ * Roten: node 1. 
+ * Varje node k har (max) två barn:
+ *  node 2*k (den vänstra) och node 2*k+1 (den högra)
+ * I den vänstra ändras b till mid(a,b) och i högra blir a mid(a,b)
+ * Föräldern till en node fås av floor(node/2) om node!=1
+ */
+double asi(double a, double b, double tol) {
+    double I = 0, I1, I2;
     double errest;
     int node = 1;
-    // ser det som ett träd istället för rekursivt
-    while(true){
-        I1 = iSimpson(a,b);
-        I2 = i2Simpson(a,b);
-        errest = abs(I1-I2);
-        if (errest < 15*tol){
+    while (true) {
+        I1 = iSimpson(a, b);
+        I2 = i2Simpson(a, b);
+        errest = abs(I1 - I2);
+        if (errest < 15 * tol) {
             I += I2;
-            // om ojämn node: 
-            // fortsätt upp till  1a jämna
-            // för varje hopp upp från ojämn node: node = floor(node,2, byt tillbaks a
-            // en upp från 1a jämna: node = node/22, byt tillbaks b 
-            // gå till höger: node = node*2 +1
-            // om ingen jämn innan node=1: break
-            
-            // om jämn node:
-            // en upp: node = node/22, byt tillbaks b 
-            // gå till höger: node = node*2 +1, ändra a
-        }
-        else{
-        // gå till vänster: node*=2, ändra b
+            /* Om ojämn node: 
+             *  Fortsätt upp till  1a jämna
+             *  För varje hopp upp från ojämn node: 
+             *     node = floor(0.5*node), byt tillbaks a
+             */
+            while (node % 2 != 0) {
+                if (node == 1) {
+                    return I; // return om vi är uppe i roten igen
+                }
+                node = floor(0.5 * node);
+                a = 2 * a - b;
+            }
+            /* Om jämn: 
+             *  En upp: node = 0.5*node, byt tillbaks b 
+             *  Gå till höger: node = 2*node +1, ändra a
+             */
+            node = 0.5 * node;
+            b = 2 * b - a;
+            node = 2 * node + 1;
+            a = mid(a,b);
+        }            
+        // Gå till vänster: node*=2, ändra b
+        else {
+            node *= 2;
+            b = mid(a,b);
         }
     }
-    
     return I;
 }
 
