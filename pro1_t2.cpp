@@ -7,6 +7,7 @@
 
 #include<iostream>
 #include<cmath>
+#include<iomanip>
 
 // function declarations	::	::	::
 
@@ -21,16 +22,16 @@ double asi(double a, double b, double tol);
 
 using namespace std;
 
+// main function
 int main(int argc, char *argv[]) 
 {
-  // main function.
-
   double a = -1.0,b = 1.0,tol = 1e-8;
   double I, I_wr;
 
   I = iRecursive(a,b,tol);
   I_wr = asi(a,b,tol);
 
+  cout << fixed << setprecision(15);		// more decimals
   cout << "With recursion: "<< I << endl;
   cout << "Without recursion: " << I_wr << endl;
   cout << "Matlab: I = 2.500809110336167" << endl << flush;
@@ -47,9 +48,9 @@ int main(int argc, char *argv[])
  * Föräldern till en node fås av floor(node/2) om node!=1
  */
 double asi(double a, double b, double tol) {
-    double I = 0, I1, I2;
-    double errest;
+    double I = 0, I1, I2, errest;
     int node = 1;
+
     while (true) {
         I1 = iSimpson(a, b);
         I2 = i2Simpson(a, b);
@@ -98,27 +99,27 @@ double iRecursive(double a, double b, double tol)
   return iRecursive(a, mid(a,b),0.5*tol) + iRecursive(mid(a,b),b,0.5*tol);
 }
 
+// Simpson of left half interval and right half interval
 double i2Simpson(double a, double b)
 {
-  // Simpson of left half interval and right half interval
   return iSimpson(a,mid(a,b)) + iSimpson(mid(a,b),b);
 }
 
+// returns the midpoint of x & y
 double mid(double x, double y)
 {
-  // returns the midpoint of x & y
   return 0.5*(x+y);
 }
 
+// Simpson quadrature
 double iSimpson(double a, double b)
 {
-  // Simpson
   return ((b-a)/6.0)*(f(a)+4.0*f(0.5*(a+b)) + f(b));
 }
 
+// The function to be integrated
 double f(double x) 
 {
-  // The function to be integrated
   return 1.0+sin(exp(3*x));
 }
 
