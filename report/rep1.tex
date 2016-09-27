@@ -8,6 +8,7 @@
 \usepackage{listings}
 \usepackage{xcolor}
 \usepackage{graphicx}
+\usepackage{placeins}
 
 %%Settings	%%%	%%%	%%%	%%%	%%%	%%%	%%%
 \renewcommand{\d}{\text{d}}
@@ -82,13 +83,24 @@ investigated for a set of values of $x$.
 
   \vspace{5mm}
   \begin{tabular}{l l l l} 
-    $x$&$N$&$|\cos x - p_c(x)|$ & $|\sin x - p_s(x)|$\\ 
+    \texttt{x}&\texttt{N}&\texttt{sin err/N+1term} & \texttt{sin err/N+1term} \\
     \hline
-    -1	& 300	& 300 	\\
-    1   & 500	& 600	\\
+    \texttt{-1}	& \texttt{1}	& \texttt{0.97651818} & \texttt{0.96725534} 	\\
+    \texttt{-1}	& \texttt{2}	& \texttt{0.98623657} & \texttt{0.98233977} 	\\
+    \texttt{-1}	& \texttt{5}	& \texttt{0.99525535} & \texttt{0.99452832} 	\\
+    \texttt{-1}	& \texttt{10}	& \texttt{nan} & \texttt{nan} 	\\
     \hline 
+    \texttt{1}	& \texttt{2}	& \texttt{0.98623657} & \texttt{0.98233977} 	\\
+    \texttt{1}	& \texttt{5}	& \texttt{0.99525535} & \texttt{0.99452832} 	\\
+    \hline
+    \texttt{2}	& \texttt{2} 	& \texttt{0.94641382} & \texttt{0.93165191}	\\
+    \texttt{2}	& \texttt{5}	& \texttt{0.98122925} & \texttt{0.97838354}	\\
+    \hline
+    \texttt{3}	& \texttt{3}	& \texttt{0.92270632} & \texttt{0.90649330}	\\
   \end{tabular}
 \end{table}
+
+\FloatBarrier
 
 \subsubsection*{Task 2}
 In this task we implement Adaptive Simpson Integration to integrate the function $f(x) = 1 + \sin \e ^{3x}$ between $a=-1$ and $b=1$. We use the functions iSimpson and i2Simpson to compute the approximate integrals named $I$ and $I_2$ in the project description. 
