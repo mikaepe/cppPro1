@@ -91,9 +91,7 @@ investigated for a set of values of $x$.
 \end{table}
 
 \subsubsection*{Task 2}
-In this task we implement Adaptive Simpson Integration to integrate the function $f(x) = 1 + \sin \e ^{3x}$ between $a=-1$ and $b=1$. We use the functions iSimpson and i2Simpson to compute the approximate integrals named $I$ and $I_2$ in the project description. 
-
-We implemented the Adaptive Simpson Integration both by using recursion, in the function iRecursive, and without recursion, in the function asi.
+In this task we implement Adaptive Simpson Integration to integrate the function $f(x) = 1 + \sin \e ^{3x}$ between $a=-1$ and $b=1$. We use the functions iSimpson and i2Simpson to compute the approximate integrals named $I$ and $I_2$ in the project description. We implemented the Adaptive Simpson Integration in the function asi.
 
 In asi we look at it as if we have a tree instead of recursion. We do not implement an actual tree structure, instead we just keep track of which node we are currently in. When we go to the left child of a node we change $b$ to $(a+b)/2$ and when we go to the right child we change $a$ to $(a+b)/2$ and we also half the tolerance for every child. We can also go up from a child to its parent by doing the reverse computations.
 
