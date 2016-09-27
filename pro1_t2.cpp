@@ -28,15 +28,16 @@ using namespace std;
 
 int main(int argc, char *argv[]) 
 {
-  double a = -1.0,b = 1.0,tol = 1e-8;
+  double a = -1.0,b = 1.0,tol = 1e-2;
   double I;
   
   I = asi(a,b,tol);
 
   cout << fixed << setprecision(15);		// more decimals
-  cout << "Without recursion: " << I << endl;
+  cout << "ASI: I = " << I << endl;
   cout << "Matlab: I = 2.500809110336167" << endl << flush;
 
+  cout << fixed << setprecision(2);
   cout << "Tol: " << tol << endl;
   return 0;
 }
