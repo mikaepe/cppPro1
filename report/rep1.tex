@@ -49,7 +49,7 @@
 \subsubsection*{Task 1}
 Consider the $2N$ degree Taylor polynomial for  $\cos x$
 \begin{align*}
-  \cos x &\approx p(x) = \sum_{n=0}^{N} (-1)^n \frac{x^{2n}}{(2n)!} \\ 
+  \cos x &\approx p_c(x) = \sum_{n=0}^{N} (-1)^n \frac{x^{2n}}{(2n)!} \\ 
   \quad &= 1 + (-1) \frac{x^2}{2!} + (-1)^2 \frac{x^4}{4!} + \dots + (-1)^N \frac{x^{2N}}{(2N)!}
   \\
   &= 1 - \frac{x\cdot x}{2\cdot 1} \Big(1 - \frac{x \cdot x}{ 4 \cdot 3} \Big( 
@@ -59,15 +59,36 @@ Hence, the polynomial may be evaluated backwords using the following scheme
 \begin{align*}
   b_N &= 1-\frac{x \cdot x}{2N(2N-1)} \\
   b_n &= 1-\frac{x\cdot x}{2n(2n-1)}b_{n+1},\quad n = N-1,N-2,\dots,2,1 \\
-  b_1 &= p(x).
+  b_1 &= p_c(x).
 \end{align*}
 This is Horners' algorithm adjusted for the fact that each second term in the polynomial vanishes.
 Similarly for $\sin x$ the polynomial may be computed up to degree $2N+1$ by
 \begin{align*}
   b_N &= 1-\frac{x \cdot x}{2N(2N+1)} \\
   b_n &= 1-\frac{x\cdot x}{2n(2n+1)}b_{n+1},\quad n = N-1,N-2,\dots,2,1 \\
-  b_1 &= x \cdot p(x).
+  x\cdot b_1 &= p_s(x).
 \end{align*}
+The algorithms above are implemented and the errors 
+$|\cos x - p_c(x)|$ and $|\sin x - p_(x)|$ are 
+investigated for a set of values of $x$.
+\begin{table}[!ht]
+\centering 
+  \begin{minipage}[t]{105mm}
+    \caption{
+      Result for some selected values of $x$ and $N$.
+    } 
+    \label{TABtask1}
+  \end{minipage}
+
+  \vspace{5mm}
+  \begin{tabular}{l l l l} 
+    $x$&$N$&$|\cos x - p_c(x)|$ & $|\sin x - p_s(x)|$\\ 
+    \hline
+    -1	& 300	& 300 	\\
+    1   & 500	& 600	\\
+    \hline 
+  \end{tabular}
+\end{table}
 
 \subsubsection*{Task 2}
 In this task we implement Adaptive Simpson Integration to integrate the function $f(x) = 1 + \sin \e ^{3x}$ between $a=-1$ and $b=1$. We use the functions iSimpson and i2Simpson to compute the approximate integrals named $I$ and $I_2$ in the project description. 
