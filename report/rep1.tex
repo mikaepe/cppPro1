@@ -103,9 +103,7 @@ investigated for a set of values of $x$.
 \FloatBarrier
 
 \subsubsection*{Task 2}
-In this task we implement Adaptive Simpson Integration to integrate the function $f(x) = 1 + \sin \e ^{3x}$ between $a=-1$ and $b=1$. We use the functions iSimpson and i2Simpson to compute the approximate integrals named $I$ and $I_2$ in the project description. 
-
-We implemented the Adaptive Simpson Integration both by using recursion, in the function iRecursive, and without recursion, in the function asi.
+In this task we implement Adaptive Simpson Integration to integrate the function $f(x) = 1 + \sin \e ^{3x}$ between $a=-1$ and $b=1$. We use the functions iSimpson and i2Simpson to compute the approximate integrals named $I$ and $I_2$ in the project description. We implemented the Adaptive Simpson Integration in the function asi.
 
 In asi we look at it as if we have a tree instead of recursion. We do not implement an actual tree structure, instead we just keep track of which node we are currently in. When we go to the left child of a node we change $b$ to $(a+b)/2$ and when we go to the right child we change $a$ to $(a+b)/2$ and we also half the tolerance for every child. We can also go up from a child to its parent by doing the reverse computations.
 
@@ -119,6 +117,36 @@ In Figure \ref{fig: tree} we can see how we go through the tree in the case when
 	\caption{Illustration of how we go through the nodes for $tol=0.01$ to do Adaptive Simpson Integration without recursion.}
 	\label{fig: tree}
 \end{figure}
+
+We ran the program with tolerance of $tol=10^{-2}, 10^{-3}, 10^{-4}$ and compared it to the value provided by Matlab. The outputs from the program is written below.
+\newline
+
+Output for a tolerance of $10^{-2}$
+\begin{center}
+\begin{lstlisting}
+ASI: I = 2.505996157240214
+Matlab: I = 2.500809110336167
+Tol: 0.01000
+\end{lstlisting}
+\end{center}
+
+Output for a tolerance of $10^{-3}$
+\begin{center}
+\begin{lstlisting}
+ASI: I = 2.499856554302364
+Matlab: I = 2.500809110336167
+Tol: 0.00100
+\end{lstlisting}
+\end{center}
+
+Output for a tolerance of $10^{-4}$
+\begin{center}
+\begin{lstlisting}
+ASI: I = 2.500809666749028
+Matlab: I = 2.500809110336167
+Tol: 0.00010
+\end{lstlisting}
+\end{center}
 
 \newpage
 %test some code snippets
