@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
   double x; int N;
   cout << "x = "; cin >> x;	// Promt user for x
   cout << "N = "; cin >> N;	// Promt user for N
-  cout << fixed << setprecision(15);	// To print more decimals
+  cout << fixed << setprecision(8);	// To print more decimals
 
   // Compute the Taylor-polynomials and values from cmath
   
