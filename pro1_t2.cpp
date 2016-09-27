@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
 {
   // main function.
 
-  double a = -1.0,b = 1.0,tol = 1e-2;
+  double a = -1.0,b = 1.0,tol = 1e-8;
   double I, I_wr;
 
   I = iRecursive(a,b,tol);
@@ -98,6 +98,7 @@ double iRecursive(double a, double b, double tol)
 
 double i2Simpson(double a, double b)
 {
+  // Simpson of left half interval and right half interval
   return iSimpson(a,mid(a,b)) + iSimpson(mid(a,b),b);
 }
 
@@ -109,11 +110,13 @@ double mid(double x, double y)
 
 double iSimpson(double a, double b)
 {
+  // Simpson
   return ((b-a)/6.0)*(f(a)+4.0*f(0.5*(a+b)) + f(b));
 }
 
 double f(double x) 
 {
+  // The function to be integrated
   return 1.0+sin(exp(3*x));
 }
 
