@@ -25,10 +25,11 @@ using namespace std;
 
 int main(int argc, char *argv[]) 
 {
-  // main function. Prompts user for x and N. Calls sinTaylor and cosTaylor
-  // functions and displays results of these compared to cmath functions.
-  // The calls errorBound function to find if the error is bounded
-  // by the N+1-term in the series.
+  /* main function. Prompts user for x and N. Calls sinTaylor and cosTaylor
+   * functions and displays results of these compared to cmath functions.
+   * The calls errorBound function to find if the error is bounded
+   * by the N+1-term in the series.
+   */
 
   double sx, sTx, cx, cTx;	// sinx/cosx from cmath & Taylor polyn.
   double x; int N;
@@ -53,17 +54,18 @@ int main(int argc, char *argv[])
 
 double sinTaylor(int N, double x) 
 {
-  // returns value of N:th degree taylor polynomial for
-  // sin function evaluated at x.
-  // Horners algorithm is used to compute the series:
-  // p(x) = a0 + a1*x + ... + aN*x^N
-  // rewrite:
-  // p(x) = a0 + x*(a1 + x*(a2 + ... + x*(aN-1 + x*aN)))...)
-  // so we define a sequence:
-  // bN = aN; bN-1 = aN-1 + bN*x; ... ; b0 = a0 + b1*x = p(x)
-  //
-  // Note, some adjustments are made to cope with the fact that each
-  // second term vanishes in the sin series.
+  /* returns value of N:th degree taylor polynomial for
+   * sin function evaluated at x.
+   * Horners algorithm is used to compute the series:
+   * p(x) = a0 + a1*x + ... + aN*x^N
+   * rewrite:
+   * p(x) = a0 + x*(a1 + x*(a2 + ... + x*(aN-1 + x*aN)))...)
+   * so we define a sequence:
+   * bN = aN; bN-1 = aN-1 + bN*x; ... ; b0 = a0 + b1*x = p(x)
+   *
+   * Note, some adjustments are made to cope with the fact that each
+   * second term vanishes in the sin series.
+   */
   
   double sinT;
   sinT = 1;
@@ -77,9 +79,10 @@ double sinTaylor(int N, double x)
 
 double cosTaylor(int N, double x) 
 {
-  // returns value of N:th degree taylor polynomial for
-  // cos function evaluated at x.
-  // Horners algorithm is used.
+  /* returns value of N:th degree taylor polynomial for
+   * cos function evaluated at x.
+   * Horners algorithm is used.
+   */
   
   double cosT;
   cosT = 1;
