@@ -28,7 +28,7 @@ using namespace std;
 
 int main(int argc, char *argv[]) 
 {
-  double a = -1.0,b = 1.0,tol = 1e-2;
+  double a = -1.0,b = 1.0,tol = 1e-4;
   double I;
   
   I = asi(a,b,tol);
@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
   cout << "ASI: I = " << I << endl;
   cout << "Matlab: I = 2.500809110336167" << endl << flush;
 
-  cout << fixed << setprecision(2);
+  cout << fixed << setprecision(5);
   cout << "Tol: " << tol << endl;
   return 0;
 }
