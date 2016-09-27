@@ -67,6 +67,7 @@ double asi(double a, double b, double tol) {
                 }
                 node = floor(0.5 * node);
                 a = 2 * a - b;
+                tol *= 2;
             }
             /* Om jämn: 
              *  En upp: node = 0.5*node, byt tillbaks b 
@@ -81,6 +82,7 @@ double asi(double a, double b, double tol) {
         else {
             node *= 2;
             b = mid(a,b);
+            tol *= 0.5;
         }
     }
     return I;
