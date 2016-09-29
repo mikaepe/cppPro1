@@ -21,11 +21,10 @@ double asi(double a, double b, double tol);
 
 using namespace std;
 
-/* main function: 
- * computes ASI for the function f between a=-1 and b=1 with tolerance tol
- * outputs the computed value and the corresponding value computed with matlab
+/* main function: Computes ASI for the function f between a=-1 and 
+ * b=1 with tolerance tol, outputs the computed value and the 
+ * corresponding value computed with matlab
  */
-
 int main(int argc, char *argv[]) 
 {
   double a = -1.0,b = 1.0,tol = 1e-4;
@@ -42,16 +41,15 @@ int main(int argc, char *argv[])
   return 0;
 }
 
-/* function asi: Adaptive Simpson Integration between a and b with tolerance tol
- * Use a tree instead of recursion
- * The root is node number 1, and each node k has at most 2 children:
+/* function asi: Adaptive Simpson Integration between a and b with 
+ * tolerance tol. Use a tree instead of recursion. The root is node 
+ * number 1, and each node k has at most 2 children:
  * - node 2k (the left one)
  * - node 2k+1 (the right one)
  * In the left child b is changed to mid(a,b) and tol=tol/2
  * In the right child a is changed to mid(a,b) and tol=tol/2
  * The parent of a node is given by floor(0.5*node) if node!=1
  */
-
 double asi(double a, double b, double tol) 
 {
     double I = 0, I1, I2, errest;
