@@ -160,11 +160,10 @@ investigated for a set of values of $x$.
 \end{table}
 
 \FloatBarrier
-
 \subsubsection*{Task 2}
-In this task we implement Adaptive Simpson Integration to integrate the function $f(x) = 1 + \sin \e ^{3x}$ between $a=-1$ and $b=1$. We use the functions iSimpson and i2Simpson to compute the approximate integrals named $I$ and $I_2$ in the project description. We implemented the Adaptive Simpson Integration in the function asi.
+In this task we implement Adaptive Simpson Integration to integrate the function $f(x) = 1 + \sin \e ^{3x}$ between $a=-1$ and $b=1$. We use the functions \texttt{iSimpson} and \texttt{i2Simpson} to compute the approximate integrals named $I$ and $I_2$ in the project description. We implemented the Adaptive Simpson Integration in the function \texttt{asi}.
 
-In asi we look at it as if we have a tree instead of recursion. We do not implement an actual tree structure, instead we just keep track of which node we are currently in. When we go to the left child of a node we change $b$ to $(a+b)/2$ and when we go to the right child we change $a$ to $(a+b)/2$ and we also half the tolerance for every child. We can also go up from a child to its parent by doing the reverse computations.
+In \texttt{asi} we look at it as if we have a tree instead of recursion. We do not implement an actual tree structure, instead we just keep track of which node we are currently in. When we go to the left child of a node we change $b$ to $(a+b)/2$ and when we go to the right child we change $a$ to $(a+b)/2$ and we also half the tolerance for every child. We can also go up from a child to its parent by doing the reverse computations.
 
 We start in the root node with number $1$ and then we go to the left child by using $leftnode = 2*node$ until we get that $\text{errest}<15*tol$, and then we found our first leaf. When we find a leaf we keep going up in the tree by using $parentnode = floor(0.5 * node)$ until we find the first even node, there we go up one more step and then to the right with $rightnode = 2*node+1$. From there we start going to the left again until we find another leaf. If we can not find an even node before the root node when we go up from a leaf, we have been through the whole tree and can stop. We get the approximate value of the integral by summing $I_2$ for each leaf of the tree.
 
