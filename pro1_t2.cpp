@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
   I = asi(a,b,tol);
 
   cout << fixed << setprecision(15);		// more decimals
-  cout << "ASI: I = " << I << endl;
+  cout << "ASI:    I = " << I << endl;
   cout << "Matlab: I = 2.500809110336167" << endl << flush;
 
   cout << fixed << setprecision(5);
