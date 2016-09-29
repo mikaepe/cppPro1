@@ -83,7 +83,7 @@ investigated for a set of values of $x$.
       Performance of the Taylor series implementation shown for selected values of 
       $x$ and $N$. The values of \texttt{sx} and \texttt{sTx} are the computed values
       from the \texttt{cmath} builtin function and the implemented Taylor polynomial to degree $2N+1
-      for $\sin x$
+      $ for $\sin x$
       respectively,
       same for \texttt{cx} and \texttt{cTx} for $\cos x$.
     } 
@@ -175,17 +175,46 @@ In Figure \ref{fig: tree} we can see how we go through the tree in the case when
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=\textwidth]{tree_graph}
-	\caption{Illustration of how we go through the nodes for $tol=0.01$ to do Adaptive Simpson Integration without recursion.}
+	\begin{minipage}[t]{105mm}
+	  \caption{
+	    Illustration of how we go through the nodes for 
+	    $tol=0.01$ to do Adaptive Simpson Integration without recursion.
+	  }
+	\end{minipage}
 	\label{fig: tree}
 \end{figure}
 
-We ran the program with tolerance of $tol=10^{-2}, 10^{-3}, 10^{-4}$ and compared it to the value provided by Matlab. The outputs from the program is written below.
+We ran the program with tolerance of $tol=10^{-2}, 10^{-3}, 10^{-4}$ 
+and compared it to the value provided by Matlab. The results from the program are given in
+Table \ref{TABtask2}.
 \newline
+
+
+\begin{table}[!ht]
+\centering 
+  \begin{minipage}[t]{105mm}
+    \caption{
+      The result of the integration using different tolerances compared to the
+      result by using Matlab.
+    } 
+    \label{TABtask2}
+  \end{minipage}
+
+  \vspace{5mm}
+  \begin{tabular}{l l} 
+    \texttt{tol}		&    \texttt{I} \\
+    \texttt{1e-2}        & \texttt{2.505996157240214}	\\
+    \texttt{1e-3}	& \texttt{2.499856554302364}	\\
+    \texttt{1e-4}	& \texttt{2.500809666749028}	\\
+    \texttt{Matlab}      & \texttt{2.500809110336167}  \\
+  \end{tabular}
+\end{table}
+\FloatBarrier
 
 Output for a tolerance of $10^{-2}$
 \begin{center}
 \begin{lstlisting}
-ASI: I = 2.505996157240214
+ASI:    I = 2.505996157240214
 Matlab: I = 2.500809110336167
 Tol: 0.01000
 \end{lstlisting}
@@ -194,7 +223,7 @@ Tol: 0.01000
 Output for a tolerance of $10^{-3}$
 \begin{center}
 \begin{lstlisting}
-ASI: I = 2.499856554302364
+ASI:    I = 2.499856554302364
 Matlab: I = 2.500809110336167
 Tol: 0.00100
 \end{lstlisting}
@@ -203,7 +232,7 @@ Tol: 0.00100
 Output for a tolerance of $10^{-4}$
 \begin{center}
 \begin{lstlisting}
-ASI: I = 2.500809666749028
+ASI:    I = 2.500809666749028
 Matlab: I = 2.500809110336167
 Tol: 0.00010
 \end{lstlisting}
