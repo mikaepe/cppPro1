@@ -27,12 +27,11 @@ int main(int argc, char *argv[])
 {
   double sx, sTx, cx, cTx;	// sinx/cosx from cmath & Taylor polyn.
   double x; int N;
-  cout << "x = "; cin >> x;	// Promt user for x
-  cout << "N = "; cin >> N;	// Promt user for N
+  cout << "x = "; cin >> x;		// Promt user for x
+  cout << "N = "; cin >> N;		// Promt user for N
   cout << fixed << setprecision(8);	// To print more decimals
 
   // Compute the Taylor-polynomials and values from cmath
-  
   sx = sin(x);
   sTx = sinTaylor(N,x);
   cx = cos(x);
@@ -43,7 +42,6 @@ int main(int argc, char *argv[])
   cout << "Taylor:  sin(x) = " << sTx << endl;
   cout << "cmath:   cos(x) = " << cx << endl;
   cout << "Taylor:  cos(x) = " << cTx << endl;
-
 
   // Compute the errorterms etc
   double  sinTermN, cosTermN;
@@ -59,9 +57,9 @@ int main(int argc, char *argv[])
 }
 
 /* Function sinTaylor returns value of N:th degree taylor polynomial for
- * sin function evaluated at x. Horners algorithm is used to compute the series.
- * Note, some adjustments are made to cope with the fact that each
- * second term vanishes in the sin series.
+ * sin function evaluated at x. Horners algorithm is used to compute the 
+ * series. Note, some adjustments are made to cope with the fact that 
+ * each second term vanishes in the series.
  */
 double sinTaylor(int N, double x) 
 {
@@ -76,7 +74,8 @@ double sinTaylor(int N, double x)
 }
 
 /* Function cosTaylor returns value of N:th degree taylor polynomial for
- * cos function evaluated at x. Horners algorithm is used, analogous to sin.
+ * cos function evaluated at x. Horners algorithm is used, 
+ * analogous to sin.
  */
 double cosTaylor(int N, double x) 
 {
