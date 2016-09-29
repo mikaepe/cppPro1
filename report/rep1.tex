@@ -49,7 +49,7 @@
 
 \subsubsection*{Task 1}
 In this task we implemented the Taylor approximations for $\sin x$ and $\cos x$.
-This was done by avoiding computing the factorials in the denumerators and the powers of $x$ in the numerators explicitly.
+This was done by avoiding computing the factorials in the denominators and the powers of $x$ in the numerators explicitly.
 Consider the $2N$ degree Taylor polynomial for  $\cos x$
 \begin{align*}
   \cos x &\approx p_c(x) = \sum_{n=0}^{N} (-1)^n \frac{x^{2n}}{(2n)!} \\ 
@@ -58,13 +58,13 @@ Consider the $2N$ degree Taylor polynomial for  $\cos x$
   &= 1 - \frac{x\cdot x}{2\cdot 1} \Big(1 - \frac{x \cdot x}{ 4 \cdot 3} \Big( 
   1 - \dots \Big(1- \frac{x \cdot x}{(2N)(2N-1)}\Big)\dots \Big).
 \end{align*}
-Hence, the polynomial may be evaluated backwords using the following scheme
+Hence, the polynomial may be evaluated backwards using the following scheme
 \begin{align*}
   b_N &= 1-\frac{x \cdot x}{2N(2N-1)} \\
   b_n &= 1-\frac{x\cdot x}{2n(2n-1)}b_{n+1},\quad n = N-1,N-2,\dots,2,1 \\
   b_1 &= p_c(x).
 \end{align*}
-This is Horners' algorithm adjusted for the fact that each second term in the polynomial vanishes.
+This is Horner's algorithm adjusted for the fact that each second term in the polynomial vanishes.
 Similarly for $\sin x$ the polynomial may be computed up to degree $2N+1$ by
 \begin{align*}
   b_N &= 1-\frac{x \cdot x}{2N(2N+1)} \\
@@ -91,7 +91,7 @@ double cosTaylor(int N, double x)
 The algorithms above are implemented and the errors 
 $|\cos x - p_c(x)|$ and $|\sin x - p_s (x)|$ are 
 compared to the corresponding $N+1$-term for a set of values of $x$ and $N$, the result is given
-in Table \ref{TABtask12}.
+in Table \ref{TABtask12}. We see that both \texttt{sin err/N+1term} and \texttt{cos err/N+1term} are less than 1 for all cases and hence the error is bounded by the $N+1$-term for all tested cases. When $N$ is too big we get $nan$ since both the error and the $N+1$-term is too close to zero to be properly represented by a double and we then try to do the division $0/0$.
 
 
 \begin{table}[!ht]
