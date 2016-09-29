@@ -72,6 +72,53 @@ Similarly for $\sin x$ the polynomial may be computed up to degree $2N+1$ by
 The algorithms above are implemented and the errors 
 $|\cos x - p_c(x)|$ and $|\sin x - p_(x)|$ are 
 investigated for a set of values of $x$.
+
+
+\begin{table}[!ht]
+\centering 
+  \begin{minipage}[t]{105mm}
+    \caption{
+      Performance of the Taylor series implementation shown for selected values of 
+      $x$ and $N$. The values of \texttt{sx} and \texttt{sTx} are the computed values
+      from the \texttt{cmath} builtin function and the implemented Taylor series for $\sin x$
+      respectively,
+      same for \texttt{cx} and \texttt{cTx} for $\cos x$.
+    } 
+    \label{TABtask1}
+  \end{minipage}
+
+  \vspace{5mm}
+  \begin{tabular}{l l l l l l} 
+    \texttt{x}&\texttt{N}&\texttt{sx} & \texttt{sTx} & \texttt{cx} & \texttt{cTx} \\
+    \hline
+    \texttt{-1}	& \texttt{1}	
+    & \texttt{-0.84147098} & \texttt{0.83333333} & \texttt{0.54030231} & \texttt{0.50000000}	\\
+    \texttt{-1}	& \texttt{2}	
+    & \texttt{-0.84147098} & \texttt{-0.84166667} & \texttt{0.54030231} & \texttt{0.54166667}	\\
+    \hline
+    \texttt{2}	& \texttt{1}	
+    & \texttt{0.90929743} & \texttt{0.66666667} & \texttt{-0.41614684} & \texttt{-1.00000000}	\\
+    \texttt{2}	& \texttt{2}	
+    & \texttt{0.90929743} & \texttt{0.93333333} & \texttt{-0.41614684} & \texttt{-0.33333333}	\\
+    \texttt{2}	& \texttt{5}	
+    & \texttt{0.90929743} & \texttt{0.90929614} & \texttt{-0.41614684} & \texttt{-0.41615520}	\\
+    \hline
+    \texttt{10}	& \texttt{5}	
+    & \texttt{-0.54402111} & \texttt{-1056.93923361} &\texttt{-0.83907153}&\texttt{-1296.79541446}\\
+    \texttt{10}	& \texttt{10}	
+    & \texttt{-0.54402111} & \texttt{2.76109093} & \texttt{-0.83907153} & \texttt{6.66456434}	\\
+     \texttt{10}	& \texttt{15}	
+    & \texttt{-0.54402111} & \texttt{-0.54412728} & \texttt{-0.83907153} & \texttt{-0.83942021}	\\
+     \texttt{10}	& \texttt{20}	
+    & \texttt{-0.54402111} & \texttt{-0.54402111} & \texttt{-0.83907153} & \texttt{-0.83907153}	\\
+ 
+ 
+
+  \end{tabular}
+\end{table}
+
+
+
 \begin{table}[!ht]
 \centering 
   \begin{minipage}[t]{105mm}
@@ -83,7 +130,7 @@ investigated for a set of values of $x$.
 
   \vspace{5mm}
   \begin{tabular}{l l l l} 
-    \texttt{x}&\texttt{N}&\texttt{sin err/N+1term} & \texttt{sin err/N+1term} \\
+    \texttt{x}&\texttt{N}&\texttt{sin err/N+1term} & \texttt{cos err/N+1term} \\
     \hline
     \texttt{-1}	& \texttt{1}	& \texttt{0.97651818} & \texttt{0.96725534} 	\\
     \texttt{-1}	& \texttt{2}	& \texttt{0.98623657} & \texttt{0.98233977} 	\\
@@ -97,6 +144,18 @@ investigated for a set of values of $x$.
     \texttt{2}	& \texttt{5}	& \texttt{0.98122925} & \texttt{0.97838354}	\\
     \hline
     \texttt{3}	& \texttt{3}	& \texttt{0.92270632} & \texttt{0.90649330}	\\
+    \texttt{3}	& \texttt{5}	& \texttt{0.95852439} & \texttt{0.95235057}	\\
+    \texttt{3}	& \texttt{10}	& \texttt{0.98513048} & \texttt{0.98392664}	\\
+    \hline
+    \texttt{5}	& \texttt{3}	& \texttt{0.80518429} & \texttt{0.76830018}	\\
+    \texttt{5}	& \texttt{5}	& \texttt{0.89113977} & \texttt{0.87584989}	\\
+    \texttt{5}	& \texttt{10}	& \texttt{0.95977271} & \texttt{0.95639607}	\\
+    \hline
+    \texttt{10}	& \texttt{3}	& \texttt{0.47425379} & \texttt{0.41141849}	\\
+    \texttt{10}	& \texttt{5}	& \texttt{0.65781950} & \texttt{0.62076516}	\\
+    \texttt{10}	& \texttt{10}	& \texttt{0.85443812} & \texttt{0.84340922}	\\
+    \texttt{10}	& \texttt{15}	& \texttt{0.92187411} & \texttt{0.91747435}	\\
+    \texttt{10}	& \texttt{20}	& \texttt{0.94971903} & \texttt{0.94954946}	\\
   \end{tabular}
 \end{table}
 
